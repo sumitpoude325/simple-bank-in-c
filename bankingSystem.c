@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <conio.h>
 typedef struct bank
 {
     char name[30];
@@ -9,13 +10,17 @@ typedef struct bank
 } details;
 void create();
 void view();
-int main()
+
+void main()
 {
+repeat:
+    system("cls");
     int choice;
 
     printf("***********Welcome to sumit bank****************\n");
     printf("1.create a new account\n");
     printf("2.view accounts\n");
+    printf("3.QUIT\n");
     scanf("%d", &choice);
 
     switch (choice)
@@ -25,50 +30,57 @@ int main()
         break;
     case 2:
         view();
-
         break;
+    case 3:
+        exit(0);
     default:
-        printf("Sorry this option doesnt exists");
-        break;
+        goto repeat;
     }
-    return 0;
 }
 
 void create()
 {
     FILE *new;
-    new = fopen("text.txt", "a");
+    new = fopen("records.txt", "a");
     details create;
-    int i=0;
+    int i = 0;
     printf("Enter the name: ");
     scanf("%s", create.name);
-     while ((getchar()) != '\n');
+    while ((getchar()) != '\n')
+        ;
     printf("Enter the account no: ");
     scanf("%s", create.accountno);
     printf("Enter your amount: ");
-    scanf("%s",create.amount);
+    scanf("%s", create.amount);
     printf("Enter the date: ");
     scanf("%s", create.date);
-      
-    fprintf(new,"\n");
-    fputs(create.name,new);
-    fprintf(new,"\t\t");
-    fprintf(new,"%s",create.accountno);
-    fprintf(new,"\t\t");
-    fprintf(new,"%s",create.amount);
-    fprintf(new,"\t\t");
-    fprintf(new,"%s",create.date);
 
+    fprintf(new, "\n");
+    fputs(create.name, new);
+    fprintf(new, "\t\t");
+    fprintf(new, "%s", create.accountno);
+    fprintf(new, "\t\t");
+    fprintf(new, "%s", create.amount);
+    fprintf(new, "\t\t");
+    fprintf(new, "%s", create.date);
+
+    fclose(new);
+    printf("\nPress any key to continue...\n");
+    getch();
+    main();
 }
 void view()
 {
     char c;
-    FILE* rptr;
-    rptr=fopen("text.txt","r");
-     while (c!=EOF)
-     {
-        c=fgetc(rptr);
-        printf("%c",c);
-     }
-     
+    FILE *rptr;
+    rptr = fopen("records.txt", "r");
+    while (c != EOF)
+    {
+        c = fgetc(rptr);
+        printf("%c", c);
+    }
+    fclose(rptr);
+    printf("\nPress any key to continue...\n");
+    getch();
+    main();
 }

@@ -1,2 +1,2 @@
-Name	Account.number   Amount     Date
-sumit		55		50000		20-20-2
+Name	  AccNum   Amount     Date
+test		01		1,00,000		7/30/2024
