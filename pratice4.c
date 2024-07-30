@@ -42,7 +42,7 @@ void create()
     int i=0;
     printf("Enter the name: ");
     scanf("%s", create.name);
-    fflush(stdin);
+     while ((getchar()) != '\n');
     printf("Enter the account no: ");
     scanf("%s", create.accountno);
     printf("Enter your amount: ");
